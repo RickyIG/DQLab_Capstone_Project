@@ -314,7 +314,29 @@ st.write("Sumber data : https://trends.builtwith.com/websitelist/PayPal/Indonesi
 
 # stb.true_or_false("On the moon, the horizontal distance is always larger than on the earth under the same initial velocity and angle.",
 #                     answer=True)
+st.subheader("Bagaimana reaksi netizen Indonesia di Twitter?")
+st.write("Reaksi yang ditunjukkan oleh para netizen pun beragam.")
+import plotly.graph_objects as go
 
+rslt = pd.read_csv('./data/fix.csv')
+fig = go.Figure(go.Bar(
+            x=rslt.frequency,
+            y=rslt.word,
+            marker=dict(
+                color='rgba(50, 171, 96, 0.6)',
+                line=dict(
+                    color='rgba(50, 171, 96, 1.0)',
+                    width=1),
+            ),
+            orientation='h'))
+fig.update_layout(title="Kata yang sering disebutkan di Twitter", yaxis=dict(autorange="reversed"))
+
+fig1, fig2 = st.columns(2)
+with fig1:
+    st.image('./assets/img/wordcloud.png')
+with fig2:
+    st.plotly_chart(fig)
+st.write("Pada grafik di atas, terdapat sebuah kata yang sempat menjadi trending di Twitter. Netizen di Indonesia menyatakan kekesalannya dengan menggunakan tagar #BlokirKominfo.\n")
 
 st.subheader("Sekarang bagaimana?")
 st.write("""Dengan data-data yang ada, dapat disimpulkan bahwa pemblokiran Steam dan Paypal akan 
